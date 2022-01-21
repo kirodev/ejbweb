@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+	<h:head>
+	</h:head>
+	<h:body>
+		<div class="card">
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:menuitem value="Users and SmartPhones" url="/halloumi/index.xhtml"
+						icon="pi pi-user" />
+					<p:menuitem value="Graphes" url="/halloumi/graph.xhtml"
+						icon="pi pi-chart-bar" />
+					<p:menuitem value="Map" url="/halloumi/map.xhtml" icon="pi pi-map" />
+				</p:menubar>
+				<h:form>
+				<p:panel header="Select a Mounth" style="margin-bottom:10px;">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="mounth" value="Mounth: " />
+						<p:selectOneMenu id="mounth" value="#{Main.mounth}"
+							style="width:150px">
+							<p:ajax listener="#{Main.onMounthChange}" update="mybar" />
+							<f:selectItem itemLabel="Select Mounth" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{Main.mounths}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:divider />
+					<p:commandButton value="Submit" action="#{Main.onSubmit}"
+						icon="pi pi-check" />
+				</p:panel>
+			</h:form>
+			</h:form>
+			<p:barChart model="#{Main.barModel}"
+				style="width: 100%; height: 500px;" />
+
+			<p:barChart id="mybar" model="#{Main.barModel1}"
+				style="width: 100%; height: 500px;" />
+		</div>
+	</h:body>
+</f:view>
+
+</html>

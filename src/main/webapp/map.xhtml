@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+	<h:head>
+	</h:head>
+	<h:body>
+		<script type="text/javascript"
+			src="https://maps.google.com/maps/api/js?sensor=false"></script>
+		<div class="card">
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:menuitem value="Users and SmartPhones" url="/halloumi/index.xhtml"
+						icon="pi pi-user" />
+					<p:menuitem value="Graphes" url="/halloumi/graph.xhtml"
+						icon="pi pi-chart-bar" />
+					<p:menuitem value="Map" url="/halloumi/map.xhtml" icon="pi pi-map" />
+				</p:menubar>
+			</h:form>
+
+			<p:gmap id="mymap" center="36.890257,30.707417" zoom="3"
+				type="HYBRID" style="width:100%;height:400px"
+				model="#{Main.simpleModel}" />
+				<h:form>
+				<p:panel header="USERS" style="margin-bottom:10px;">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="userEmail" value="User: " />
+						<p:selectOneMenu id="userEmail" value="#{Main.userEmail}"
+							style="width:150px">
+							<p:ajax listener="#{Main.onUserChange}" update="mymap" />
+							<f:selectItem itemLabel="Select User" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{Main.usersEmail}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<p:divider />
+					<p:commandButton value="Submit" action="#{Main.onSubmit1}"
+						icon="pi pi-check" />
+				</p:panel>
+			</h:form>
+		</div>
+	</h:body>
+</f:view>
+
+</html>
